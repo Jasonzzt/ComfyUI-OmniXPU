@@ -15,14 +15,14 @@ Requires `omni_xpu_kernel` installed. Without it the node loads silently with no
 
 ## What it does
 
-| Patch | Target | Speedup |
-|-------|--------|---------|
-| ESIMD Flash Attention | `optimized_attention` | Xe2 ISA SDP kernel, auto fallback to PyTorch SDPA |
-| ESIMD RoPE | `_apply_rope1` / `apply_rope1` | ESIMD rotary embedding for Flux models |
-| ESIMD LayerNorm/RMSNorm | `LayerNorm.forward` / `RMSNorm.forward` / `rms_norm()` | ESIMD norm kernels |
-| FP8 GEMM | `fp8_linear` / `mixed_precision_ops` | oneDNN W8A16 for E4M3/E5M2 weights |
-| FP8 Negative Zero Fix | `manual_stochastic_round_to_float8` | Prevents -0.0 -> NaN on XPU |
-| Interpolate Fix | `F.interpolate` | Routes XPU tensors through CPU (hardware workaround) |
+| Patch | Target |
+|-------|--------|
+| ESIMD Flash Attention | `optimized_attention` |
+| ESIMD RoPE | `_apply_rope1` / `apply_rope1` |
+| ESIMD LayerNorm/RMSNorm | `LayerNorm.forward` / `RMSNorm.forward` / `rms_norm()` |
+| FP8 GEMM | `fp8_linear` / `mixed_precision_ops` |
+| FP8 Negative Zero Fix | `manual_stochastic_round_to_float8` |
+| Interpolate Fix | `F.interpolate` |
 
 ## Environment Variables
 
@@ -85,5 +85,4 @@ No ComfyUI core files are modified. Works with unmodified upstream ComfyUI.
 
 - ComfyUI >= 0.18.x
 - PyTorch >= 2.7 with XPU support
-- Intel Arc / Data Center GPU (Xe2 architecture for ESIMD kernels)
 - `omni_xpu_kernel` >= 0.1.0
