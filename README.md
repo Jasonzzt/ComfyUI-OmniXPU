@@ -1,6 +1,6 @@
 # ComfyUI-OmniXPU
 
-Intel XPU acceleration for upstream ComfyUI via [omni_xpu_kernel](https://github.com/intel/omni_xpu_kernel).
+Intel XPU acceleration for upstream ComfyUI via [omni_xpu_kernel](https://github.com/intel/llm-scaler/tree/main/omni/omni_xpu_kernel).
 
 All optimizations are applied transparently at startup — no workflow changes needed.
 
