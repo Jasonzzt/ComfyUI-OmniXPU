@@ -41,7 +41,7 @@ def apply():
     _orig_ln_fwd = LN.forward
 
     def _ln_cast(self, input):
-        if _can_use_omni(input) and len(self.normalized_shape) == 1:
+        if _can_use_omni(input) and len(self.normalized_shape) == 1 and self.weight is not None:
             _log_first("LayerNorm", input.shape)
             weight, bias = comfy_ops.cast_bias_weight(self, input)[:2]
             orig = input.shape
@@ -53,7 +53,7 @@ def apply():
         if self.comfy_cast_weights or len(self.weight_function) > 0:
             return _ln_cast(self, *args, **kwargs)
         input = args[0] if args else kwargs.get("input")
-        if input is not None and _can_use_omni(input) and len(self.normalized_shape) == 1:
+        if input is not None and _can_use_omni(input) and len(self.normalized_shape) == 1 and self.weight is not None:
             _log_first("LayerNorm", input.shape)
             orig = input.shape
             w = self.weight
